@@ -5,10 +5,12 @@ export default function Home() {
   let threadId: any = 0;
   const startPoint = Math.ceil(scale / 2);
   const [forward, setForward] = useState("right");
-  const [snake, setSnake] = useState<any[]>([{ x: startPoint, y: startPoint - 1 },
-    { x: startPoint, y: startPoint }]);
+  const [snake, setSnake] = useState<any[]>([
+    { x: startPoint, y: startPoint - 1 },
+    { x: startPoint, y: startPoint },
+  ]);
   const [render, setRender] = useState(0);
-  const [ball, setBall] = useState<any>({ x: 8, y: 6 })
+  const [ball, setBall] = useState<any>({ x: 8, y: 6 });
 
   const boardArray: any = [];
   for (let i = 0; i < scale; i++) {
@@ -19,33 +21,43 @@ export default function Home() {
   }
 
   const handleGo = () => {
-    threadId = setInterval(()=>{
-      console.log(snake, forward)
+    threadId = setInterval(() => {
+      console.log(snake, forward);
       let newSnake = snake;
-      newSnake.push(
-        {
-          x: snake[snake.length-1].x + (forward==="right"? 1 : (forward==="left"? -1 : 0)), 
-          y: snake[snake.length-1].y + (forward==="up"? -1 : (forward==="down"? 1 : 0)), 
-        });
+      newSnake.push({
+        x:
+          snake[snake.length - 1].x +
+          (forward === "right" ? 1 : forward === "left" ? -1 : 0),
+        y:
+          snake[snake.length - 1].y +
+          (forward === "up" ? -1 : forward === "down" ? 1 : 0),
+      });
 
-      snake[snake.length-1].x === ball.x && snake[snake.length-1].y === ball.y ? setBall({x:1, y:1}) : newSnake.shift();
+      snake[snake.length - 1].x === ball.x &&
+      snake[snake.length - 1].y === ball.y
+        ? setBall({ x: 1, y: 1 })
+        : newSnake.shift();
       setSnake(newSnake);
-      setRender(prev=>prev+1)
-    }, 600)
-  }
+      setRender((prev) => prev + 1);
+    }, 600);
+  };
 
   const handleEnd = () => {
     clearInterval(threadId);
-  }
-  
+  };
+
   return (
     <>
       <main className="bg-gray-700 text-white h-[100vh]">
         <section className="pt-6 pl-20">
           <input type="text" placeholder="Input scale" />
           <span> go</span>
-          <button onClick={handleGo} className="pl-5">start</button>
-          <button onClick={handleEnd} className="pl-5">end</button>
+          <button onClick={handleGo} className="pl-5">
+            start
+          </button>
+          <button onClick={handleEnd} className="pl-5">
+            end
+          </button>
           <section className="flex gap-5">
             <button onClick={() => setForward("up")}>up</button>
             <button onClick={() => setForward("down")}>down</button>
@@ -74,9 +86,7 @@ export default function Home() {
                       <div>
                         {index1}:{index2}
                       </div>
-                      <div>
-                        {render}
-                      </div>
+                      <div>{render}</div>
                     </div>
                   );
                 })}
