@@ -31,11 +31,19 @@ export default function Home() {
         y:
           snake[snake.length - 1].y +
           (forward === "up" ? -1 : forward === "down" ? 1 : 0),
+      };
+      if (newPosition.x > scale - 1) {
+        newPosition.x = 0;
       }
-      if(newPosition.x > scale-1){newPosition.x = 0};
-      if(newPosition.y > scale-1){newPosition.y = 0};
-      if(newPosition.x < 0 ){newPosition.x = scale-1};
-      if(newPosition.y < 0 ){newPosition.y = scale-1};
+      if (newPosition.y > scale - 1) {
+        newPosition.y = 0;
+      }
+      if (newPosition.x < 0) {
+        newPosition.x = scale - 1;
+      }
+      if (newPosition.y < 0) {
+        newPosition.y = scale - 1;
+      }
       newSnake.push(newPosition);
 
       snake[snake.length - 1].x === ball.x &&
