@@ -24,14 +24,19 @@ export default function Home() {
     threadId = setInterval(() => {
       console.log(snake, forward);
       let newSnake = snake;
-      newSnake.push({
+      let newPosition = {
         x:
           snake[snake.length - 1].x +
           (forward === "right" ? 1 : forward === "left" ? -1 : 0),
         y:
           snake[snake.length - 1].y +
           (forward === "up" ? -1 : forward === "down" ? 1 : 0),
-      });
+      }
+      if(newPosition.x > scale-1){newPosition.x = 0};
+      if(newPosition.y > scale-1){newPosition.y = 0};
+      if(newPosition.x < 0 ){newPosition.x = scale-1};
+      if(newPosition.y < 0 ){newPosition.y = scale-1};
+      newSnake.push(newPosition);
 
       snake[snake.length - 1].x === ball.x &&
       snake[snake.length - 1].y === ball.y
@@ -86,7 +91,7 @@ export default function Home() {
                       <div>
                         {index1}:{index2}
                       </div>
-                      <div>{render}</div>
+                      <div className="text-gray-700">{render}</div>
                     </div>
                   );
                 })}
