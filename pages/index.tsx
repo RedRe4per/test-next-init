@@ -14,8 +14,10 @@ export default function Home() {
   }
 
   const snake: any = [];
-  snake.push([startPoint, startPoint - 1], [startPoint, startPoint]);
-  console.log(boardArray);
+  snake.push({x: startPoint, y:startPoint - 1}, {x: startPoint, y:startPoint});
+  console.log(snake)
+
+  let ball: {x: number, y: number} = {x:8, y: 6};
 
   boardArray[startPoint][startPoint] = 1;
   boardArray[startPoint][startPoint - 1] = 1;
@@ -31,16 +33,17 @@ export default function Home() {
           {boardArray.map((row: any, index1: number) => {
             return (
               <div className="flex" key={index1}>
-                {row.map((column: string, index2: number) => {
+                {row.map((column: any, index2: number) => {
+
                   return (
                     <div
-                      className="w-16 h-16 border border-gray-400"
+                      className={`w-16 h-16 border border-gray-400 ${snake.findIndex((item: any)=>item.x === index1 && item.y === index2)<0? ((ball.x === index1 && ball.y === index2)? "bg-red-500": "") : "bg-blue-600"}`}
                       key={index2}
                     >
                       <div>
                         {index1}:{index2}
                       </div>
-                      <div>{column}</div>
+                      <div>{(ball.x === index1 && ball.y === index2)? "3": "1"}</div>
                     </div>
                   );
                 })}
