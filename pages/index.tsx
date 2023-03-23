@@ -44,6 +44,8 @@ export default function Home() {
       if (newPosition.y < 0) {
         newPosition.y = scale - 1;
       }
+
+      //if(snake.includes(newPosition)) throw error: game over
       newSnake.push(newPosition);
 
       snake[snake.length - 1].x === ball.x &&
