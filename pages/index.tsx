@@ -31,6 +31,13 @@ export default function Home() {
         <section className="pt-6 pl-20">
           <input type="text" placeholder="Input scale" />
           <span> go</span>
+          <button className="pl-5">start</button>
+          <section className="flex gap-5">
+          <button onClick={() => setForward("up")}>up</button>
+          <button onClick={() => setForward("down")}>down</button>
+          <button onClick={() => setForward("left")}>left</button>
+          <button onClick={() => setForward("right")}>right</button>
+          </section>
         </section>
         <section className="pt-16 pl-10">
           {boardArray.map((row: any, index1: number) => {
