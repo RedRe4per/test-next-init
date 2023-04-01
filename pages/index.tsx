@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <>
-      <main>Next project</main>
+      <main>Next project1</main>
     </>
   );
 }
